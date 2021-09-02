@@ -10,6 +10,7 @@ const loadData = (searchData) => {
 document.getElementById("submit-btn").addEventListener("click", () => {
   const search = document.getElementById("search-input").value;
   spinner("block");
+  // error handling
   if (search == "") {
     document.getElementById("no-result").innerText = "Please Enter Book Name";
     document.getElementById("no-result").style.display = "block";
@@ -30,12 +31,10 @@ const spinner = (displayType) => {
 
 // showing search results
 const showResults = (data) => {
-  // error handel
+  // error handling
   if (data.numFound === 0) {
     document.getElementById("no-result").style.display = "block";
     spinner("none");
-    error("none");
-    document.getElementById("search-books").innerText = 0;
   } else {
     document.getElementById("no-result").style.display = "none";
   }
@@ -43,10 +42,9 @@ const showResults = (data) => {
   const container = document.getElementById("row");
   container.textContent = "";
   let count = 0;
-  document.getElementById("search-books").innerText = 0;
   books.slice(0, 30).forEach((book) => {
     spinner("none");
-    const { title, author_name, publisher, first_publish_year, cover_i } = book;
+    const { cover_i, title, author_name, publisher, first_publish_year } = book;
     const div = document.createElement("div");
     div.classList.add("col");
     div.innerHTML = `
@@ -56,13 +54,13 @@ const showResults = (data) => {
       <h5 class="card-title"><span class="text-primary">Book Title:</span> ${title}</h5>
       <div class="card-text">
        <h5><span class="text-primary">Author Name:</span> ${
-         author_name ? author_name : "Not Found"
+         author_name ? author_name : "No author name found"
        }</h5>
        <h5><span class="text-primary">Publisher:</span> ${
-         publisher ? publisher : "Not Found"
+         publisher ? publisher : "No publisher name found"
        }</h5>
        <h5><span class="text-primary">First Publish Year:</span> ${
-         first_publish_year ? first_publish_year : "Not Found"
+         first_publish_year ? first_publish_year : "No publish year found"
        }</h5>
       </div>
     </div>
