@@ -54,13 +54,15 @@ const showResults = (data) => {
       <h5 class="card-title"><span class="text-primary">Book Title:</span> ${title}</h5>
       <div class="card-text">
        <h5><span class="text-primary">Author Name:</span> ${
-         author_name ? author_name : "No author name found"
+         author_name ? author_name : "Author name not found"
        }</h5>
        <h5><span class="text-primary">Publisher:</span> ${
-         publisher ? publisher : "No publisher name found"
+         publisher ? publisher : "Publisher name not found"
        }</h5>
        <h5><span class="text-primary">First Publish Year:</span> ${
-         first_publish_year ? first_publish_year : "No publish year found"
+         first_publish_year
+           ? first_publish_year
+           : "First publish year not found"
        }</h5>
       </div>
     </div>
