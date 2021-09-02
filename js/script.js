@@ -1,20 +1,22 @@
+// fetch data dynamically form API
 const loadData = (searchData) => {
-  const url = `http://openlibrary.org/search.json?q=${searchData}`;
+  const url = `https://openlibrary.org/search.json?q=${searchData}`;
   fetch(url)
     .then((response) => response.json())
     .then((data) => showResults(data));
 };
 
+// Search Button Part
 document.getElementById("submit-btn").addEventListener("click", () => {
   const search = document.getElementById("search-input").value;
   spinner("block");
   if (search == "") {
-    document.getElementById("no-result").style.display = "none";
-    error("block");
+    document.getElementById("no-result").innerText = "Please Enter Book Name";
+    document.getElementById("no-result").style.display = "block";
     spinner("none");
   } else {
     document.getElementById("no-result").style.display = "none";
-    error("none");
+    document.getElementById("no-result").innerText = "No Books Found";
   }
   loadData(search);
   document.getElementById("search-input").value = "";
@@ -22,14 +24,13 @@ document.getElementById("submit-btn").addEventListener("click", () => {
   document.getElementById("total-books").style.display = "none";
 });
 
-const error = (displayType) => {
-  document.getElementById("error").style.display = displayType;
-};
 const spinner = (displayType) => {
   document.getElementById("spinner").style.display = displayType;
 };
 
+// showing search results
 const showResults = (data) => {
+  // error handel
   if (data.numFound === 0) {
     document.getElementById("no-result").style.display = "block";
     spinner("none");
@@ -38,12 +39,12 @@ const showResults = (data) => {
   } else {
     document.getElementById("no-result").style.display = "none";
   }
-  const books = data.docs;
+  const books = data.docs; // get books data
   const container = document.getElementById("row");
   container.textContent = "";
+  let count = 0;
   document.getElementById("search-books").innerText = 0;
-  //   console.log(books.length);
-  books.forEach((book) => {
+  books.slice(0, 30).forEach((book) => {
     spinner("none");
     const { title, author_name, publisher, first_publish_year, cover_i } = book;
     const div = document.createElement("div");
@@ -67,8 +68,10 @@ const showResults = (data) => {
     </div>
   </div>
     `;
+    count++;
     container.appendChild(div);
     document.getElementById("total-books").style.display = "block";
-    document.getElementById("search-books").innerText = books.length;
+    document.getElementById("total-search-books").innerText = books.length;
+    document.getElementById("search-books").innerText = count;
   });
 };

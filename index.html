@@ -21,19 +21,20 @@
           <input
             id="search-input"
             type="text"
-            class="form-control"
+            class="form-control rounded-3"
             placeholder="Search Book Name"
             aria-label="Recipient's username"
             aria-describedby="button-addon2"
           />
-          <button class="btn btn-danger" type="button" id="submit-btn">
+          <button
+            class="btn btn-danger rounded-3"
+            type="button"
+            id="submit-btn"
+          >
             Search
           </button>
         </div>
-        <h3 id="error" style="display: none" class="text-danger text-center">
-          Please enter book name
-        </h3>
-
+        <!-- spinner -->
         <div class="d-flex justify-content-center pt-5">
           <div
             id="spinner"
@@ -50,18 +51,21 @@
           class="text-center text-danger"
           style="display: none"
         >
-          No Result Found
+          No Results Found
         </h3>
       </section>
       <!-- search results -->
       <section class="container">
         <div id="row" class="row row-cols-1 row-cols-md-3 g-4"></div>
+        <!-- total found books -->
         <h3
           id="total-books"
-          class="text-center text-danger fw-bold py-2"
+          class="text-center text-danger fw-bold py-4"
           style="display: none"
         >
-          Total Found Books:<span id="search-books"> 0</span>
+          Showing <span id="search-books">0</span> books out of
+          <span id="total-search-books">0</span>
+          results
         </h3>
       </section>
     </main>
@@ -72,7 +76,7 @@
       integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
       crossorigin="anonymous"
     ></script>
-    <!-- Custom script -->
+    <!-- custom script -->
     <script src="js/script.js"></script>
   </body>
 </html>
